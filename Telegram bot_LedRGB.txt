@@ -102,7 +102,7 @@ void handleNewMessages(int numNewMessages) {
       welcome += "/red_on to turn red_led ON\n";
       welcome += "/green_on to turn green_on ON\n";
       welcome += "/blue_on to turn blue_on ON\n";
-      welcome += "/led_off to turn led_off OFF\n";
+      welcome += "/led_off to turn all_led OFF\n";
       bot.sendMessage(chat_id, welcome, "");
     } else if (text == "/red_on") {
       onRGBLed(1, 0, 0);
