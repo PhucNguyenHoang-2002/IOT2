@@ -22,7 +22,8 @@ void readD0(){
     if(clap ==0){
       detection_range_start = detection_range = millis();
       clap++;
-    }else if (clap > 0 && millis() - detection_range >=100) {
+    }else if (clap > 0 && millis() - detection_range >=100) { 
+      detection_range = millis();
       clap++;
     }
   }
@@ -31,7 +32,8 @@ void readD0(){
       Serial.println("CLAP 1 times");
       digitalWrite(LED_PIN, HIGH);
     }else if (clap== 2) {
-      Serial.println(LED_PIN, LOW);
+      Serial.println("CLAP 2 times");
+      digitalWrite(LED_PIN, LOW);
     }
     clap = 0;
   }
