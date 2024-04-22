@@ -45,9 +45,9 @@ void initRGBLed() {
 void onRGBLed(int red, int green, int blue) {
   if (red == 1) digitalWrite(RED_LED_PIN, HIGH);
   else digitalWrite(GREEN_LED_PIN, LOW);
-  if (red == 1) digitalWrite(GREEN_LED_PIN, HIGH);
+  if (green == 1) digitalWrite(GREEN_LED_PIN, HIGH);
   else digitalWrite(GREEN_LED_PIN, LOW);
-  if (red == 1) digitalWrite(BLUE_LED_PIN, HIGH);
+  if (blue == 1) digitalWrite(BLUE_LED_PIN, HIGH);
   else digitalWrite(BLUE_LED_PIN, LOW);
 }
 /*Wifi*/
@@ -110,10 +110,10 @@ void handleNewMessages(int numNewMessages) {
     } else if (text == "/green_on") {
       onRGBLed(0, 1, 0);
       bot.sendMessage(chat_id, "green_led is ON", "");
-    } else if (text == "/red_on") {
+    } else if (text == "/bule_on") {
       onRGBLed(0, 0, 1);
-      bot.sendMessage(chat_id, "red_led is ON", "");
-    } else if (text == "/red_on") {
+      bot.sendMessage(chat_id, "blue_led is ON", "");
+    } else if (text == "/led_of") {
       onRGBLed(0, 0, 0);
       bot.sendMessage(chat_id, "all_led is OFF", "");
     }
