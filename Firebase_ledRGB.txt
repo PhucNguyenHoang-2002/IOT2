@@ -38,10 +38,10 @@ void initRGBLed() {
 
 void onRGBLed(int red, int green, int blue) {
   if (red == 1) digitalWrite(RED_LED_PIN, HIGH);
+  else digitalWrite(RED_LED_PIN, LOW);
+  if (green == 1) digitalWrite(GREEN_LED_PIN, HIGH);
   else digitalWrite(GREEN_LED_PIN, LOW);
-  if (red == 1) digitalWrite(GREEN_LED_PIN, HIGH);
-  else digitalWrite(GREEN_LED_PIN, LOW);
-  if (red == 1) digitalWrite(BLUE_LED_PIN, HIGH);
+  if (blue == 1) digitalWrite(BLUE_LED_PIN, HIGH);
   else digitalWrite(BLUE_LED_PIN, LOW);
 }
 /*Wifi*/
