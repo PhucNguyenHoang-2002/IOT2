@@ -1,0 +1,39 @@
+RCWL0516_Oled
+
+#if defined (ESP8266)
+  #define D0_PIN  D5
+#elif defined (ESP32)
+  #define D0_PIN  15
+#endif
+
+void setup(){
+  Serial.begin(115200);
+  initOled();
+}
+
+void loop(){
+  bool motion = readD0();
+  if(motion) {
+    // Serial.println("Motion: +");
+    printOled("RCWL-0516","Motion: +");
+  }else{
+    // Serial.println("Motion: -");
+    printOled("RCWL-0516","Motion: -");
+  }
+  delay(1000);
+}
+
+/* Radar RCWL0516 */
+bool readD0(){
+  int dValue =digitalRead(D0_PIN);
+  if (dValue) return 1;
+  else return 0;
+}
+
+/*OLED*/
+void initOled(){
+
+}
+void prinOled(String line1, String line2){
+
+}

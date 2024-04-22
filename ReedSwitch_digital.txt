@@ -1,0 +1,29 @@
+ReedSwitch_digital
+
+#if defined (ESP8266)
+  #define D0_PIN  D5
+#elif defined (ESP32)
+  #define D0_PIN  15
+#endif
+
+void setup(){
+  Serial.begin(115200);
+  pinMode(D0_PIN, INPUT_PULLUP);
+}
+
+void loop(){
+  bool state =readD0();
+  if (state){
+    Serial.println ("State: open");
+  }else{
+    Serial.println("State: closed");
+  }
+  delay(100);
+}
+
+/* Reed switch */
+bool readD0(){
+  int dValue =digitalRead(D0_PIN);
+  if (dValue) return 1;
+  else return 0;
+}

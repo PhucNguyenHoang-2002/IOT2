@@ -1,0 +1,29 @@
+Obstacle-digital
+
+#if defined (ESP8266)
+  #define D0_PIN  D5
+#elif defined (ESP32)
+  #define D0_PIN 15
+#endif
+
+
+void setup(){
+  Serial.begin(115200);
+}
+
+void loop(){
+  bool obstacle = readD0();
+  if (obstacle) {
+    Serial.println("Obstacle: +");
+  } else{
+    Serial.println("Obstacle: -");
+  }
+  delay(1000);
+}
+
+/* Infrared obstacle sensor */
+bool readD0(){
+  int dValue = digitalRead(D0_PIN);
+  if (dValue) return 0;
+  else return 1;
+}

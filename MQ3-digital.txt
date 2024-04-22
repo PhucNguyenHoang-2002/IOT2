@@ -1,0 +1,28 @@
+MQ3-digital
+
+#if defined (ESP8266)
+  #define MQ3_PIN  D5
+#elif defined (ESP32)
+  #define MQ3_PIN 15
+#endif
+
+void setup() {
+  Serial.begin(115200);
+}
+
+void loop(){
+  bool alcohol =readMQ3();
+  if (alcohol){
+    Serial.println("Alcohol: +");
+  } else{
+    Serial.println("Alcohol: -");
+  }
+  delay(1000);
+}
+
+/*MQ3*/
+bool readMQ3(){
+  int dValue = digitalRead(MQ3_PIN);// 0:alcohol; 1 : no-alcohol
+  if (dValue) return 0;
+  else return 1; 
+}

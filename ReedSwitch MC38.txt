@@ -1,0 +1,19 @@
+Reedswitch MC38
+
+#if defined (ESP8266)
+  #define D0_PIN  D5
+#elif defined (ESP32)
+  #define D0_PIN  15
+#endif
+
+void setup(){
+  Serial.begin(115200);
+  // pinMode(D0_PIN, INPUT);
+  pinMode(D0_PIN, INPUT_PULLUP);
+}
+
+void loop(){
+  int dValue =digitalRead(D0_PIN);
+  Serial.println("dValue: " + String (dValue));
+  delay(1000);
+}

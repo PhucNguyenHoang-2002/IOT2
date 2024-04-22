@@ -1,0 +1,26 @@
+SRF05_digital
+
+#if defined (ESP8266)
+  #define TRIG_PIN  D5
+  #define ECHO_PIN  D6
+#elif defined (ESP32)
+  #define TRIG_PIN  13
+  #define ECHO_PIN  12
+#endif
+#include <SRF05.h>
+SRF05 srf(TRIG_PIN, ECHO_PIN);
+
+void setup(){
+  Serial.begin(115200);
+}
+
+void loop(){
+  float distance =readSRF05();
+  Serial.println("Distance (cm): " + String(distance));
+  delay(1000);
+}
+
+/*SRF05*/
+float readSRF05(){
+  return srf.getCentimeter();
+}

@@ -1,0 +1,27 @@
+MQ2 digital
+#if defined (ESP8266)
+  #define MQ2_PIN  D5
+#elif defined (ESP32)
+  #define MQ2_PIN 15
+#endif
+
+void setup() {
+  Serial.begin(115200);
+}
+
+void loop(){
+  bool smoke =readMQ2();
+  if (smoke){
+    Serial.println("Smoke: +");
+  } else{
+    Serial.println("Smoke: -");
+  }
+  delay(1000);
+}
+
+/*MQ2*/
+bool readMQ2(){
+  int dValue = digitalRead(MQ2_PIN);// 0:smoke; 1 : no-smoke
+  if (dValue) return 0;
+  else return 1; 
+}
