@@ -1,0 +1,27 @@
+/*light sensor*/
+#define D0_PIN D5
+/*Led RGB*/
+#define LED_PIN D7
+
+void setup(){
+  Serial.begin(115200);
+  pinMode(LED_PIN, OUTPUT);
+}
+
+void loop(){
+  bool light =readD0();
+  if(light){
+    Serial.println("light: +");
+    digitalWrite(LED_PIN, LOW);
+  }else {
+    Serial.println("light: -");
+    digitalWrite(LED_PIN, HIGH);
+  }
+  delay(100);
+}
+/*Light sensor*/
+bool readD0() {
+  int dValue = digitalRead(D0_PIN);
+  if(dValue) return 0;
+  else return 1;
+}
