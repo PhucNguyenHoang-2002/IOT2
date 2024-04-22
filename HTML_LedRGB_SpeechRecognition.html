@@ -28,59 +28,59 @@
                         });
                     });
         }
-        function initSpeechRecognition(){
-          const btnStart =document.getElementById('btnStart');
-          const lblCommand =document.getElementById('lblCommand');
-          const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
-          recognition.lang ='vi-VN';//'en-US'
-          recognition.interimResults = true;
-          recognition.continous =false;
-          btnStart.addEventListener('click',() => {
-            recognition.start();
-            btnStart.disabled =true;
-            btnStart.textContent = 'Recording .....';
-            lblCommand.textContent ='';
-          });
-          recognition.onresult = (event)=> {
-            const result =event.results[event.results.length - i][0].transcript;
-            lblCommand.textContent =result;
-          };
-          recognition.oned =()=> {
-            btnStart.disabled =false;
-            btnStart.textContent ='Voice command';
-            parseCommand(lblCommand.textContent);
-          };
-          recognition.onerror =(event)=>{
-            console.error('Speech recognition error:', event.error);
-          };
-          recognition.onnomatch =()=>{
-            console.log('No speech was regognized.');
-          };
-        }
-        function parseCommand(cmd) {// IMPORTANT: update commands in Vietnamese
-        if (cmd.includes('den') && cmd.includes('do')){
-          let r = 0;
-          if (cmd.includes('bat') || cmd.includes('mo')) r = i;
-          else if (cmd.includes('tat')) r= 0;
-          const g =parseInt(document.getElementById('lblGreen').innerText);
-          const b =parseInt(document.getElementById('lblBlue').innerText);
-          set(child(dbRef, 'LEDs'),{R: r, G: g, B: b});
-        } else if (cmd.includes('den') && cmd.includes('xanh la')){
-          let g = 0;
-          if (cmd.includes('bat') || cmd.includes('mo')) g = i;
-          else if (cmd.includes('tat')) g= 0;
-          const r =parseInt(document.getElementById('lblRed').innerText);
-          const b =parseInt(document.getElementById('lblBlue').innerText);
-          set(child(dbRef, 'LEDs'),{R: r, G: g, B: b});
-        } else if (cmd.includes('den') && cmd.includes('xanh duong')){
-          let b = 0;
-          if (cmd.includes('bat') || cmd.includes('mo')) b = i;
-          else if (cmd.includes('tat')) b= 0;
-          const r =parseInt(document.getElementById('lblRed').innerText);
-          const g =parseInt(document.getElementById('lblGreen').innerText);
-          set(child(dbRef, 'LEDs'),{R: r, G: g, B: b});
-        } 
-        }
+        function initSpeechRecognition() {
+      const btnStart = document.getElementById('btnStart');
+      const lblCommand = document.getElementById('lblCommand');
+      const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
+      recognition.lang = 'vi-VN'; // 'en-US'
+      recognition.interimResults = true;
+      recognition.continuous = false;
+      btnStart.addEventListener('click', () => {
+        recognition.start();
+        btnStart.disabled = true;
+        btnStart.textContent = 'Recording ........';
+        lblCommand.textContent = '';
+      });
+      recognition.onresult = (event) => {
+        const result = event.results[event.results.length - 1][0].transcript;
+        lblCommand.textContent = result;
+      };
+      recognition.onend = () => {
+        btnStart.disabled = false;
+        btnStart.textContent = 'Voice command';
+        parseCommand(lblCommand.textContent);
+      };
+      recognition.onerror = (event) => {
+        console.error('Speech recognition error:', event.error);
+      };
+      recognition.onnomatch = () => {
+        console.log('No speech was recognized.');
+      };
+    }
+    function parseCommand(cmd) { // IMPORTANT: update commands in Vietnamese
+      if (cmd.includes('den') && cmd.includes('do')) {
+        let r = 0;
+        if (cmd.includes('bat') || cmd.includes('mo')) r = 1;
+        else if (cmd.includes('tat')) r = 0;
+        const g = parseInt(document.getElementById('lblGreen').innerText);
+        const b = parseInt(document.getElementById('lblBlue').innerText);
+        set(child(dbRef, 'LEDs'), { R: r, G: g, B: b });
+      } else if (cmd.includes('den') && cmd.includes('xanh la')) {
+        let g = 0;
+        if (cmd.includes('bat') || cmd.includes('mo')) g = 1;
+        else if (cmd.includes('tat')) g = 0;
+        const r = parseInt(document.getElementById('lblRed').innerText);
+        const b = parseInt(document.getElementById('lblBlue').innerText);
+        set(child(dbRef, 'LEDs'), { R: r, G: g, B: b });
+      } else if (cmd.includes('den') && cmd.includes('xanh duong')) {
+        let b = 0;
+        if (cmd.includes('bat') || cmd.includes('mo')) b = 1;
+        else if (cmd.includes('tatx')) b = 0;
+        const r = parseInt(document.getElementById('lblRed').innerText);
+        const g = parseInt(document.getElementById('lblGreen').innerText);
+        set(child(dbRef, 'LEDs'), { R: r, G: g, B: b });
+      }
+    }
   </script>
 </head>
 <body onload='page_Load()'>
