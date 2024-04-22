@@ -15,8 +15,8 @@
 WiFiClientSecure client;
 UniversalTelegramBot bot(BOTtoken, client);
 X509List cert(TELEGRAM_CERTIFICATE_ROOT);
-#define DB_URL "https://dmcuocdoi-a155f-default-rtdb.asia-southeast1.firebasedatabase.app/"
-#define DB_SECRET "MX0BdfPfMSp5pcIMTh8BvwWfzVywxoROUaIdT1ty"
+//#define DB_URL "https://dmcuocdoi-a155f-default-rtdb.asia-southeast1.firebasedatabase.app/"
+//#define DB_SECRET "MX0BdfPfMSp5pcIMTh8BvwWfzVywxoROUaIdT1ty"
 
 
 void setup() {
@@ -44,7 +44,7 @@ void initRGBLed() {
 
 void onRGBLed(int red, int green, int blue) {
   if (red == 1) digitalWrite(RED_LED_PIN, HIGH);
-  else digitalWrite(GREEN_LED_PIN, LOW);
+  else digitalWrite(RED_LED_PIN, LOW);
   if (green == 1) digitalWrite(GREEN_LED_PIN, HIGH);
   else digitalWrite(GREEN_LED_PIN, LOW);
   if (blue == 1) digitalWrite(BLUE_LED_PIN, HIGH);
