@@ -1,0 +1,22 @@
+#define MOTOR_PIN D7
+
+void setup(){
+  initMotor();
+}
+
+void loop(){
+  onMotor();
+  delay(3000);
+  offMotor();
+  delay(3000);
+}
+void initMotor(){
+  pinMode(MOTOR_PIN, OUTPUT);
+}
+void onMotor(){
+  digitalWrite(MOTOR_PIN, HIGH);
+}
+
+void offMotor(){
+  digitalWrite(MOTOR_PIN, LOW);
+}
