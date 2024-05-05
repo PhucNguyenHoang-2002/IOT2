@@ -1,0 +1,35 @@
+#define S_PIN D5
+#define MOTOR_PIN D7
+
+void setup(){
+  Serial.begin(115200);
+}
+
+void loop(){
+  bool water =readS();
+  if(water) {
+    Serial.println(" Water : +");
+    onMotor();
+  } else {
+    Serial.println(" Water: -");
+    offMotor();
+  }
+  delay(1000);
+}
+
+void initMotor(){
+  pinMode(MOTOR_PIN, OUTPUT);
+}
+void onMotor(){
+  digitalWrite(MOTOR_PIN, HIGH);
+}
+
+void offMotor(){
+  digitalWrite(MOTOR_PIN, LOW);
+}
+/* Water sensor*/
+bool readS() {
+  int dValue = digitalRead(S_PIN);
+  if (dValue) return 1;
+  else return 0;
+}
