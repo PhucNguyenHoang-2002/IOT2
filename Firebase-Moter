@@ -1,0 +1,73 @@
+#include <ESP8266WiFi.h>
+#include <FirebaseESP8266.h>
+#define MOTOR_PIN D7
+#define AP_SSID "HSU_Students"
+#define AP_PASSWORD "dhhs12cnvch"
+#define DB_URL "<db_url>"
+#define DB_SECRET "<db_secret>"
+#define NTP_SERVER "pool.ntp.org"
+FirebaseConfig config;
+FirebaseAuth auth;
+FirebaseData fbdo;
+
+void setup(){
+  initMotor();
+  initWifi();
+  initFirebase();
+}
+
+void loop(){
+  onMotor();
+  delay(3000);
+  offMotor();
+  delay(3000);
+}
+void initMotor(){
+  pinMode(MOTOR_PIN, OUTPUT);
+}
+void onMotor(){
+  digitalWrite(MOTOR_PIN, HIGH);
+}
+
+void offMotor(){
+  digitalWrite(MOTOR_PIN, LOW);
+}
+ /*Wifi*/
+void initWifi() {
+  blinkBuiltinLed(10);
+  Serial.print("\nConnecting to ");
+  Serial.print(AP_SSID);
+  WiFi.begin(AP_SSID, AP_PASSWORD);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.print("\nWiFi connected, IP address: ");
+  Serial.println(WiFi.localIP());
+  WiFi.setAutoReconnect(true);
+  WiFi.persistent(true);
+  blinkBuiltinLed(10);
+}
+void blinkBuiltinLed(int n) {
+  pinMode(BUILTIN_LED, OUTPUT);
+  for (int i = 1; i <= n; i++) {
+      digitalWrite(BUILTIN_LED, LOW); delay(200);
+      digitalWrite(BUILTIN_LED, HIGH); delay(200);
+  }
+}
+
+  /*FIREBASE*/
+void initFirebase(){
+  config.database_url = DB_URL;
+  config.signer.tokens.legacy_token = DB_SECRET;
+  Firebase.begin(&config, &auth);
+  Firebase.reconnectNetwork(true);
+}
+int getValueFromFirebase(){
+  int value = -1;
+  if(Firebase.ready()){
+    if (Firebase.getInt(fbdo,"BUZZER/value")) value =fbdo.intData();
+    Serial.println("value: " + String(value));
+  }
+  return value;
+}
