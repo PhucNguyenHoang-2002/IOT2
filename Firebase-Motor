@@ -17,10 +17,13 @@ void setup(){
 }
 
 void loop(){
-  onMotor();
-  delay(3000);
-  offMotor();
-  delay(3000);
+  int value= getValueFromFirebase();
+  if (value){
+    onMotor();
+  }else{
+    offMotor();
+  }
+delay(100);
 }
 void initMotor(){
   pinMode(MOTOR_PIN, OUTPUT);
