@@ -66,7 +66,7 @@ void initFirebase(){
 int getValueFromFirebase(){
   int value = -1;
   if(Firebase.ready()){
-    if (Firebase.getInt(fbdo,"BUZZER/value")) value =fbdo.intData();
+    if (Firebase.getInt(fbdo,"Motor/value")) value =fbdo.intData();
     Serial.println("value: " + String(value));
   }
   return value;
