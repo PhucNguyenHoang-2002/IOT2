@@ -92,6 +92,6 @@ int getValueFromFirebase(){
 
 void setValueToFirebase(int value){
   if(Firebase.ready()){
-    Firebase.setInt(fbdo, "SRRVO/value", value);
+    Firebase.setInt(fbdo, "SERVO/value", value);
   }
 }
