@@ -19,7 +19,7 @@ int oldValue = 0;
 void loop() {
   String uid = getCardUID();
 
-  if (uid == "13119411722" && oldValue == 0) {
+  if (uid == "51508322" && oldValue == 0) {
     Serial.println("white card");
     upServo();
     oldValue = 1;
